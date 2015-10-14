@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="/vendor/bower_components/bootstrap/dist/css/bootstrap.css">
+  <script src="/vendor/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/vendor/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/vendor/bower_components/socket.io-client/socket.io.js"></script>
+</head>
+
+<body>
+  <a id="setcolor" href="#">Set color</a>
+  <script>
+    $(document).ready(function(){
+      var socket = io.connect('http://localhost:8080');
+            
+        $('#setcolor').on('click', function(){
+          socket.emit('set color', { color: 0x112233 });    
+        });
+    });
+  </script>
+</body>
+
+</html>

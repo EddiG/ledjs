@@ -1,0 +1,9 @@
+{
+  "name": "ledserver",
+  "version": "0.0.1",
+  "author": "Eduard Gilmutdinov",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~4.0.0"
+  }
+}
