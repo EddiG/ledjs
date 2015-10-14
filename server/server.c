@@ -4,6 +4,7 @@
 #include <arpa/inet.h>
 #include <errno.h>
 #include <stdbool.h>
+#include "ws2812-RPi.h"
 
 #define PORT  9999
 #define LEDS_COUNT  90
@@ -27,6 +28,9 @@ void ctrl_c_hook(int s){
   if (sockfd >= 0) 
 	 close(sockfd);
    
+  /*---Terminate PWM on Raspberry Pi---*/
+  dispose_pwm();
+   
    exit(1);
 }
 
@@ -40,7 +44,8 @@ void send_data(unsigned char data[], ssize_t size)
   }
 
   for (i = 0; i < LEDS_COUNT; i++) {
-    printf("#%x%x%x \n", data[i], data[i + 1], data[i + 2]);
+    //printf("#%x%x%x \n", data[i], data[i + 1], data[i + 2]);
+    setPixelColor(i, data[i], data[i+1], data[i+2]);
   }
 }
 
@@ -80,6 +85,9 @@ int main(int argc, char *argv[])
 	if (listen(sockfd, 20) != 0) {
 		error("ERROR socket listen");		
 	}
+  
+  /*---Initialize PWM on Raspberry Pi---*/
+  init_pwm();
 
 	/*---Forever... ---*/
 	client_len = sizeof(client_addr);
