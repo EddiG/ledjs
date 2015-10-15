@@ -47,6 +47,8 @@ void send_data(unsigned char data[], ssize_t size)
     //printf("#%x%x%x \n", data[i], data[i + 1], data[i + 2]);
     setPixelColor(i, data[i], data[i+1], data[i+2]);
   }
+  
+  show();
 }
 
 int main(int argc, char *argv[])
